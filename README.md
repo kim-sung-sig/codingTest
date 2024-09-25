@@ -12,7 +12,7 @@
 ---
 
 ## 🔥 백준
-[![Baekjoon badge](http://mazassumnida.wtf/api/v2/generate_badge?boj=tjdtlr12349@naver.com)](https://www.acmicpc.net/user/tjdtlr12349@naver.com)
+[![Baekjoon badge](http://mazassumnida.wtf/api/v2/generate_badge?boj=tjdtlr12349)](https://www.acmicpc.net/user/tjdtlr12349)
 
 - 백준에서 풀어본 문제들을 확인할 수 있습니다.
 - 문제는 각 디렉토리별로 분류되어 있으며, 각 문제의 풀이 방법과 코드가 포함되어 있습니다.
