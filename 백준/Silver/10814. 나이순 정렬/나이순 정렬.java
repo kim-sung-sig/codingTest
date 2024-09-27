@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -15,7 +14,12 @@ public class Main {
         
         String[][] arr = new String[n][3];
         for(int i = 0; i < n; i++) {
-            arr[i] = Stream.concat(Arrays.stream(br.readLine().split(" ")), Arrays.stream(new String[] {i + ""})).toArray(String[]::new);
+            // arr[i] = Stream.concat(Arrays.stream(br.readLine().split(" ")), Arrays.stream(new String[] {i + ""})).toArray(String[]::new);
+            // 스트림이 가독성을 떨어트리는 느낌이라서 아래와 같이 변경
+            String[] input = br.readLine().split(" ");
+            arr[i][0] = input[0];
+            arr[i][1] = input[1];
+            arr[i][2] = String.valueOf(i);
         }
         br.close();
 
