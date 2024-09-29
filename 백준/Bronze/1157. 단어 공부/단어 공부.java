@@ -33,6 +33,8 @@ public class Main {
         System.out.println(multipleMax ? "?" : sb.toString());
     }
 
+    // 아래의 코드는 메모리와 속도측면에서 좋지 않은 코드이다. 기본형 배열을 사용하여 메모리와 속도 개선을 진행하였다.
+    
     // public static void main(String[] args) throws Exception{
     //     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //     String input = br.readLine();
