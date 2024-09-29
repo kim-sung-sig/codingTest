@@ -1,23 +1,24 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        String[] NandB = sc.nextLine().split(" ");
-        String N = NandB[0];
-        int B = Integer.parseInt(NandB[1]);
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] nb = br.readLine().split(" ");
+        String n = nb[0];
+        int b = Integer.parseInt(nb[1]);
+        br.close();
 
-        int value = 0;
+        int result = 0;
 
-        int len = N.length();
+        int len = n.length();
         for(int i = 0; i < len; i++){
-            int v = N.charAt(i) + 0 >= 65 ? N.charAt(i) - 55 : Integer.parseInt(N.substring(i, i + 1));
-            value += v * Math.pow(B, len - 1 - i);
+            int v = n.charAt(i) + 0 >= 65 ? n.charAt(i) - 55 : Integer.parseInt(n.substring(i, i + 1));
+            result += v * Math.pow(b, len - 1 - i);
         }
 
-        System.out.println(value);
-
-        sc.close();
+        System.out.println(result);
     }
+
 }
