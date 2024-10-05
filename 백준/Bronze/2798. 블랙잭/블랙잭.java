@@ -1,9 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class Main {
@@ -17,21 +14,30 @@ public class Main {
         int[] arr = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         br.close();
 
-        Arrays.sort(arr);
-
-        List<Integer> list = new ArrayList<>();
+        int sum = -1;
         for(int i = N - 1; i >= 0; i--) {
+
+            if(arr[i] >= M) continue; // skip
+
             for(int j = i - 1; j >= 0; j--) {
+
+                if(arr[i] + arr[j] >= M) continue; // skip
+
                 for(int k = j - 1; k >= 0; k--) {
-                    int sum = arr[i] + arr[j] + arr[k];
-                    if(sum <= M) {
-                        list.add(sum);
+                    int tempSum = arr[i] + arr[j] + arr[k];
+                    if(tempSum <= M) {
+                        if(tempSum == M) {
+                            sum = tempSum;
+                            break;
+                        } else if(tempSum > sum) {
+                            sum = tempSum;
+                        }
                     }
                 }
             }
         }
 
-        System.out.println(list.stream().mapToInt(Integer::intValue).max().getAsInt());
+        System.out.println(sum);
     }
 
 }
