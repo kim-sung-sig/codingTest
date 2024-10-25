@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.util.Arrays;
 
 public class Main {
 
@@ -12,16 +13,14 @@ public class Main {
         dp = new int[m + 1];
 
         // 소수 계산
+        Arrays.fill(dp, 1);
+        dp[0] = 0;
+        dp[1] = 0;
         for (int i = 2; i <= m; i++) {
-            boolean isPrime = true;
-            for (int j = 2; j * j <= i; j++) {
-                if (i % j == 0) {
-                    isPrime = false;
-                    break;
+            if(dp[i] == 1) {
+                for (int j = i * i; j <= m; j += i) {
+                    dp[j] = 0;
                 }
-            }
-            if (isPrime) {
-                dp[i] = 1;
             }
         }
 
