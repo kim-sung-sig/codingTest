@@ -12,12 +12,13 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        int[][] arr = new int[n][m];
-
-        for (int i = 0; i < n; i++) {
+        int[][] arr = new int[n + 1][m + 1];
+        long[][] dp = new long[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
             st = new StringTokenizer(br.readLine(), " ");
-            for (int j = 0; j < m; j++) {
+            for (int j = 1; j <= m; j++) {
                 arr[i][j] = Integer.parseInt(st.nextToken());
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] + arr[i][j];
             }
         }
 
@@ -33,13 +34,7 @@ public class Main {
             int x2 = Integer.parseInt(st.nextToken());
             int y2 = Integer.parseInt(st.nextToken());
 
-            long sum = 0;
-            for (int j = x1 - 1; j < x2; j++) {
-                for (int l = y1 - 1; l < y2; l++) {
-                    sum += arr[j][l];
-                }
-            }
-            result[i] = sum;
+            result[i] = dp[x2][y2] - dp[x1 - 1][y2] - dp[x2][y1 - 1] + dp[x1 - 1][y1 - 1];
         }
 
         for (long l : result) {
