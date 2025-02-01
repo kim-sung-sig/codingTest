@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -16,8 +15,12 @@ public class Main {
 
             int[][] arr = new int[N][N];
 
-            for (int i = 0; i < N; i++) arr[i] = Arrays.stream(br.readLine().split("")).mapToInt(Integer::parseInt).toArray();
-            // print(arr);
+            for (int i = 0; i < N; i++) {
+                String line = br.readLine();
+                for (int j = 0; j < N; j++) {
+                    arr[i][j] = line.charAt(j) - '0';
+                }
+            }
 
             int[][] dp = new int[N][N];
             int count = 0;
