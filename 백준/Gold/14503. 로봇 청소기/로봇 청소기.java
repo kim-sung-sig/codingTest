@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    static int[][] delta = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+    static int[][] delta = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
     public static void main(String[] args) throws Exception {
         int answer = 0;
@@ -14,11 +14,7 @@ public class Main {
             String[] rcd = br.readLine().split(" ");
             int r = Integer.parseInt(rcd[0]); int c = Integer.parseInt(rcd[1]); int d = Integer.parseInt(rcd[2]);
 
-            int vectorIndex = 0;
-            if (d == 0) vectorIndex = 0;
-            else if (d == 1) vectorIndex = 3;
-            else if (d == 2) vectorIndex = 2;
-            else if (d == 3) vectorIndex = 1;
+            int vectorIndex = d;
 
             int[][] map = new int[N][M];
             for (int i = 0; i < N; i++) {
@@ -76,7 +72,7 @@ public class Main {
     }
 
     static int turn(int vectorIndex) {
-        return (vectorIndex + 1) % 4;
+        return (vectorIndex + 3) % 4;
     }
 
     static void print(int x, int y, int[][] map) {
