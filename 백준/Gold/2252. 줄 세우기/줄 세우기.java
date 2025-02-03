@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
+import java.util.stream.IntStream;
 
 public class Main {
 
@@ -14,12 +15,14 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        int[] rank = new int[N + 1];
-        List<Integer>[] graph = new ArrayList[N + 1];
+        // 인접 리스트
+        @SuppressWarnings("unchecked")
+        List<Integer>[] graph = IntStream.rangeClosed(0, N)
+                .mapToObj(i -> new ArrayList<>())
+                .toArray(ArrayList[]::new);
 
-        for (int i = 1; i <= N; i++) {
-            graph[i] = new ArrayList<>();
-        }
+        // 진입 차수
+        int[] rank = new int[N + 1];
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine(), " ");
@@ -71,15 +74,15 @@ public class Main {
             if (v.isEmpty()) queue.add(k);
         });
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Set<Integer> visited = new HashSet<>(queue);
         while (!queue.isEmpty()) {
-            int tall = queue.poll();
-            sb.append(tall).append(" ");
-            map.remove(tall);
+            int cur = queue.poll();
+            sb.append(cur).append(" ");
+            map.remove(cur);
 
             map.forEach((k, v) -> {
-                v.remove(tall);
+                v.remove(cur);
                 if (v.isEmpty() && !visited.contains(k)) {
                     queue.add(k);
                     visited.add(k);
