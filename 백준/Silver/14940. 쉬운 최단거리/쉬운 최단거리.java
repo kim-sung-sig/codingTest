@@ -47,7 +47,7 @@ public class Main {
                 int nextY = y + dy[i];
 
                 if (nextX < 0 || nextY < 0 || nextX >= N || nextY >= M) continue;
-                if (result[nextX][nextY] == 0 || result[nextX][nextY] != -1) continue;
+                if (result[nextX][nextY] >= 0) continue;
 
                 queue.add(new Main.Node(nextX, nextY, c + 1));
                 result[nextX][nextY] = c + 1;
