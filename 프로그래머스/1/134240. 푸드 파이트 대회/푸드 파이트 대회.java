@@ -1,14 +1,15 @@
 class Solution {
     public String solution(int[] food) {
-        StringBuilder answer = new StringBuilder();
-        for (int i = 0; i < food.length; i++) {
-            int count = food[i]/2;
+        StringBuilder left = new StringBuilder();
 
-            answer.append(String.valueOf(i).repeat(count));
+        for (int i = 1; i < food.length; i++) {
+            int count = food[i] / 2;
+            String repeated = String.valueOf(i).repeat(count);
+            left.append(repeated);
         }
 
-        String reversedAnswer = new StringBuilder(answer.toString()).reverse().toString();
+        StringBuilder right = new StringBuilder(left).reverse();
 
-        return answer + "0" + reversedAnswer;
+        return left + "0" + right;
     }
 }
