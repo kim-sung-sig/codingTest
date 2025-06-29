@@ -1,9 +1,5 @@
-import java.util.*;
-
 class Solution {
     public int solution(int[] sides) {
-        Arrays.sort(sides);
-        int small = sides[0];
-        return small * 2 - 1;
+        return 2 * Math.min(sides[0], sides[1]) - 1;
     }
 }
