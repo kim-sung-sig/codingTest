@@ -16,8 +16,7 @@ class Solution {
 
 			if (!map.isEmpty()) {
 				int key = num == -1 ? map.firstKey() : map.lastKey();
-				int count = map.get(key);
-				var i = count == 1 ? map.remove(key) : map.put(key, count - 1);
+				map.computeIfPresent(key, (k, v) -> v == 1 ? null : v - 1);
 			}
 		}
 
