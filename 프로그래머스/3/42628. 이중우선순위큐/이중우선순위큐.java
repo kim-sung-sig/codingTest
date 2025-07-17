@@ -9,18 +9,13 @@ class Solution {
 			String o = arr[0];
 			int num = Integer.parseInt(arr[1]);
 
-			if (o.equals("I")) {
-				map.merge(num, 1, Integer::sum);
-				continue;
-			}
-
-			if (!map.isEmpty()) {
-				int key = num == -1 ? map.firstKey() : map.lastKey();
+			if (o.equals("I")) map.merge(num, 1, Integer::sum);
+			else if (!map.isEmpty()) {
+				var key = num < 0 ? map.firstKey() : map.lastKey();
 				map.computeIfPresent(key, (k, v) -> v == 1 ? null : v - 1);
 			}
 		}
 
-		if (map.isEmpty()) return new int[]{0, 0};
-		return new int[]{map.lastKey(), map.firstKey()};
+		return map.isEmpty() ? new int[]{0, 0} : new int[]{map.lastKey(), map.firstKey()};
 	}
 }
