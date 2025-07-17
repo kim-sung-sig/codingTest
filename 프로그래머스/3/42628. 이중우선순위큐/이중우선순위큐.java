@@ -9,12 +9,15 @@ class Solution {
 			String o = arr[0];
 			int num = Integer.parseInt(arr[1]);
 
-			if (o.equals("D") && !map.isEmpty()) {
+			if (o.equals("I")) {
+				map.merge(num, 1, Integer::sum);
+				continue;
+			}
+
+			if (!map.isEmpty()) {
 				int key = num == -1 ? map.firstKey() : map.lastKey();
 				int count = map.get(key);
 				var i = count == 1 ? map.remove(key) : map.put(key, count - 1);
-			} else if (o.equals("I")) {
-				map.merge(num, 1, Integer::sum);
 			}
 		}
 
