@@ -10,24 +10,10 @@ class Solution {
 		int lastTempIndex = (n - 1) % w;
 		int lastIndex = totalFloors % 2 == 0 ? (w - 1) - lastTempIndex : lastTempIndex;
 
-		if (floor == totalFloors) {
-			// 최고층인 경우
-			answer = 1;
-		}
-		else {
-			int k;
-			if (totalFloors % 2 == 0 && index < lastIndex) {
-				k = -1;
-			}
-			else if (totalFloors % 2 == 1 && lastIndex < index) {
-				k = -1;
-			}
-			else {
-				k = 0;
-			}
-			answer = totalFloors - floor + 1 + k;
-		}
+		// 최고층인 경우
+		if (floor == totalFloors) return 1;
 
-		return answer;
+		int k = (totalFloors % 2 == 0 && index < lastIndex) || (totalFloors % 2 == 1 && lastIndex < index) ? -1 : 0;
+		return totalFloors - floor + 1 + k;
 	}
 }
