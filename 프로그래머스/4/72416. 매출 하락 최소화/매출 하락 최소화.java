@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Solution {
@@ -7,15 +8,20 @@ class Solution {
 	static int INF = Integer.MAX_VALUE;
 
 	public static int solution(int[] sales, int[][] links) {
-
 		int n = sales.length;
 
-		// 팀장 - 팀원 관계를 그래프로 표현
-		List<List<Integer>> childrenList = new ArrayList<>();
-		for (int i = 0; i <= n; i++) childrenList.add(new ArrayList<>());
-		for (int[] link : links) childrenList.get(link[0]).add(link[1]);
+		// 인접 리스트 초기화
+		List<List<Integer>> childrenList = Stream.generate(ArrayList<Integer>::new).limit(n + 1).collect(Collectors.toList());
 
-		int[][] cost = new int[sales.length + 1][2];
+		// 팀장 - 팀원 관계를 그래프로 표현
+		for (int[] link : links) {
+			int leader = link[0];
+			int member = link[1];
+			childrenList.get(leader).add(member);
+		}
+
+		// [i][0]: 참, [i][1]: 불참
+		int[][] cost = new int[n + 1][2];
 
 		dfs(1, childrenList, sales, cost);
 
