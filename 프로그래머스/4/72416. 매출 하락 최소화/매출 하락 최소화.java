@@ -42,12 +42,12 @@ class Solution {
 			cost[node][0] += minCost;
 			cost[node][1] += minCost;
 
-			if (cost[child][0] < cost[child][1]) {
+			if (attend < notAttend) {
 				hasAttendingChild = true;
+				continue;
 			}
-			else {
-				minAttendDiff = Math.min(minAttendDiff, cost[child][0] - cost[child][1]);
-			}
+
+			minAttendDiff = Math.min(minAttendDiff, attend - notAttend);
 		}
 
 		if (hasAttendingChild) return;
