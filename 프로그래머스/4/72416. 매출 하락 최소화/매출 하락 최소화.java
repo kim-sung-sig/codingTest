@@ -7,59 +7,50 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 class Solution {
-	public static ArrayList<ArrayList<Integer>> link;
-	public static int[][] dp = new int[300001][2];
-	public static void main(String[] args) {
-		int a = solution(new int[]{14, 17, 15, 18, 19, 14, 13, 16, 28, 17},
-				new int[][]{{10, 8}, {1, 9}, {9, 7}, {5, 4}, {1, 5}, {5, 10}, {10, 6}, {1, 3}, {10, 2}}
-		);
 
-		System.out.println(a);
-	}
+	static int INF = Integer.MAX_VALUE;
 
 	public static int solution(int[] sales, int[][] links) {
-		link = new ArrayList<>();
 
-		for(int i=0;i<sales.length+1;i++) {
-			link.add(new ArrayList<>());
-		}
+		// cost[i][0]: i직원 참가 시 최소 비용
+		// cost[i][1]: i직원 불참 시 최소 비용
+		int[][] cost = new int[sales.length + 1][2];
+		Arrays.stream(cost).forEach(arr -> Arrays.fill(arr, INF));
 
-		for(int i=0;i<links.length;i++) {
-			int a = links[i][0];
-			int b = links[i][1];
-			link.get(a).add(b);
-		}
+		// 팀장 - 팀원 관계를 그래프로 표현
+		// key: 팀장, value: 팀원 집합
+		Map<Integer, Set<Integer>> tree = new HashMap<>();
+		Arrays.stream(links).forEach(link ->
+				tree.computeIfAbsent(link[0], k -> new HashSet<>()).add(link[1])
+		);
 
-		dfs(sales, 1);
-		int answer = Math.min(dp[1][0], dp[1][1]);
-		return answer;
+		dfs(1, tree, sales, cost);
+
+		return Math.min(cost[1][0], cost[1][1]);
 	}
 
-	public static void dfs(int[] sales, int idx) {
-		dp[idx][0] = 0;
-		dp[idx][1] = sales[idx-1];
+	private static void dfs(int node, Map<Integer, Set<Integer>> graph, int[] sales, int[][] cost) {
+		cost[node][0] = sales[node - 1];
+		cost[node][1] = 0;
 
-		if(link.get(idx).isEmpty()) return;
-		int extra = (int)1e9;
-		for(int child:link.get(idx)) {
-			dfs(sales, child);
+		Set<Integer> children = graph.get(node);
+		if (children == null || children.isEmpty()) return;
 
-			if(dp[child][0] < dp[child][1]) {
-				dp[idx][0] += dp[child][0];
-				dp[idx][1] += dp[child][0];
+		int extra = INF;
+		for (int child : children) {
+			dfs(child, graph, sales, cost);
 
-				extra = Math.min(extra, dp[child][1] - dp[child][0]);
-			} else {
-
-				dp[idx][0] += dp[child][1];
-				dp[idx][1] += dp[child][1];
-
+			if(cost[child][0] < cost[child][1]) {
+				cost[node][0] += cost[child][0];
+				cost[node][1] += cost[child][0];
 				extra = 0;
 			}
+			else {
+				cost[node][0] += cost[child][1];
+				cost[node][1] += cost[child][1];
+				extra = Math.min(extra, cost[child][0] - cost[child][1]);
+			}
 		}
-
-		dp[idx][0] += extra;
-		return;
+		cost[node][1] += extra;
 	}
-
 }
