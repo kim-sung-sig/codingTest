@@ -1,9 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Stream;
 
 class Solution {
@@ -12,45 +8,50 @@ class Solution {
 
 	public static int solution(int[] sales, int[][] links) {
 
-		// cost[i][0]: i직원 참가 시 최소 비용
-		// cost[i][1]: i직원 불참 시 최소 비용
-		int[][] cost = new int[sales.length + 1][2];
-		Arrays.stream(cost).forEach(arr -> Arrays.fill(arr, INF));
+		int n = sales.length;
 
 		// 팀장 - 팀원 관계를 그래프로 표현
-		// key: 팀장, value: 팀원 집합
-		Map<Integer, Set<Integer>> tree = new HashMap<>();
-		Arrays.stream(links).forEach(link ->
-				tree.computeIfAbsent(link[0], k -> new HashSet<>()).add(link[1])
-		);
+		List<List<Integer>> childrenList = new ArrayList<>();
+		for (int i = 0; i <= n; i++) childrenList.add(new ArrayList<>());
+		for (int[] link : links) childrenList.get(link[0]).add(link[1]);
 
-		dfs(1, tree, sales, cost);
+		int[][] cost = new int[sales.length + 1][2];
+
+		dfs(1, childrenList, sales, cost);
 
 		return Math.min(cost[1][0], cost[1][1]);
 	}
 
-	private static void dfs(int node, Map<Integer, Set<Integer>> graph, int[] sales, int[][] cost) {
+	private static void dfs(int node, List<List<Integer>> childrenList, int[] sales, int[][] cost) {
 		cost[node][0] = sales[node - 1];
 		cost[node][1] = 0;
 
-		Set<Integer> children = graph.get(node);
-		if (children == null || children.isEmpty()) return;
+		if (childrenList.get(node).isEmpty()) return;
 
-		int extra = INF;
-		for (int child : children) {
-			dfs(child, graph, sales, cost);
+		int minAttendDiff = INF;
+		boolean hasAttendingChild = false;
 
-			if(cost[child][0] < cost[child][1]) {
-				cost[node][0] += cost[child][0];
-				cost[node][1] += cost[child][0];
-				extra = 0;
+		for (int child : childrenList.get(node)) {
+			dfs(child, childrenList, sales, cost);
+
+			int attend = cost[child][0];
+			int notAttend = cost[child][1];
+
+			int minCost = Math.min(attend, notAttend);
+
+			cost[node][0] += minCost;
+			cost[node][1] += minCost;
+
+			if (cost[child][0] < cost[child][1]) {
+				hasAttendingChild = true;
 			}
 			else {
-				cost[node][0] += cost[child][1];
-				cost[node][1] += cost[child][1];
-				extra = Math.min(extra, cost[child][0] - cost[child][1]);
+				minAttendDiff = Math.min(minAttendDiff, cost[child][0] - cost[child][1]);
 			}
 		}
-		cost[node][1] += extra;
+
+		if (hasAttendingChild) return;
+
+		cost[node][1] += minAttendDiff;
 	}
 }
