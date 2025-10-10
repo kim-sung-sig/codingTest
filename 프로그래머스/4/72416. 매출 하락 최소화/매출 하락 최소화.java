@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Solution {
@@ -11,7 +10,9 @@ class Solution {
 		int n = sales.length;
 
 		// 인접 리스트 초기화
-		List<List<Integer>> childrenList = Stream.generate(ArrayList<Integer>::new).limit(n + 1).collect(Collectors.toList());
+//		List<List<Integer>> childrenList = Stream.generate(ArrayList<Integer>::new).limit(n + 1).collect(Collectors.toList());
+		List<List<Integer>> childrenList = new ArrayList<>(n + 1);
+		for (int i = 0; i <= n; i++) childrenList.add(new ArrayList<>());
 
 		// 팀장 - 팀원 관계를 그래프로 표현
 		for (int[] link : links) {
