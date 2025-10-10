@@ -1,20 +1,23 @@
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Solution {
 	public int solution(int n, int[][] edge) {
-		List<List<Integer>> graph = new ArrayList<>();
-		for (int i = 0; i < n; i++) {
-			graph.add(new ArrayList<>());
-		}
+		List<Edges> graph = Stream.generate(Edges::new).limit(n).collect(Collectors.toList());
 
-		for (int[] e : edge) {
-			graph.get(e[0] - 1).add(e[1] - 1);
-			graph.get(e[1] - 1).add(e[0] - 1);
-		}
+		Arrays.stream(edge).forEach(edges -> {
+			int x = edges[0] - 1;
+			int y = edges[1] - 1;
+			graph.get(x).add(y);
+			graph.get(y).add(x);
+		});
 
 		boolean[] visited = new boolean[n];
 		int[] distance = new int[n];
@@ -41,5 +44,17 @@ class Solution {
 		}
 
 		return answer;
+	}
+}
+
+class Edges implements Iterable<Integer> {
+	Set<Integer> links = new HashSet<>();
+	public void add(int node) {
+		links.add(node);
+	}
+
+	@Override
+	public Iterator<Integer> iterator() {
+		return links.iterator();
 	}
 }
