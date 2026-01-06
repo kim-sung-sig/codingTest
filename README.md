@@ -45,7 +45,7 @@
 - **Mattermost** - Go 기반 클린 아키텍처 팀 채팅 (⭐ 29k+)
 - **Zulip** - Python 기반 이벤트 드리븐 스레드 채팅 (⭐ 21k+)
 - **Chatwoot** - Ruby on Rails 기반 고객 지원 플랫폼 (⭐ 20k+)
-- **Matrix Synapse** - Python 기반 분산형 통신 프로토콜 (⭐ 11k+)
+- **Matrix (Element)** - Python 기반 분산형 통신 프로토콜 (⭐ 11k+)
 - **Tinode** - Go 기반 경량 메시징 서버 (⭐ 12k+)
 
 각 프로젝트의 아키텍처 패턴, 기술 스택, 학습 난이도 등 상세한 정보는 [레퍼런스 문서](./백엔드_아키텍처_레퍼런스.md)를 참고하세요.
