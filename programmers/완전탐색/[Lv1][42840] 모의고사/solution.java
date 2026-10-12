@@ -3,17 +3,16 @@ class Solution {
         int[] answer = {};
         int[] score = new int[3];
         for (int t = 0; t < answers.length; t++) {
-            int a = aVal(t); b = bVal(t); c = cVal(t);
+            int a = aVal(t), b = bVal(t), c = cVal(t);
             int ans = answers[t];
-        
-            System.out.println(a);
-            System.out.println(b);
-            System.out.println(c);
-            
+
             if (a == ans) score[0]++;
             if (b == ans) score[1]++;
             if (c == ans) score[2]++;
         }
+        
+        int max = Math.max(score);
+        
 
         return answer;
     }

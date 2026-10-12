@@ -50,40 +50,21 @@
 ```
 실행 결과
 AI 코드 피드백 (Beta)
-/Solution.java:6: error: cannot find symbol
-            int a = aVal(t); b = bVal(t); c = cVal(t);
-                             ^
-  symbol:   variable b
-  location: class Solution
-/Solution.java:6: error: cannot find symbol
-            int a = aVal(t); b = bVal(t); c = cVal(t);
-                                          ^
-  symbol:   variable c
-  location: class Solution
-/Solution.java:10: error: cannot find symbol
-            System.out.println(b);
-                               ^
-  symbol:   variable b
-  location: class Solution
-/Solution.java:11: error: cannot find symbol
-            System.out.println(c);
-                               ^
-  symbol:   variable c
-  location: class Solution
-/Solution.java:14: error: cannot find symbol
-            if (b == ans) score[1]++;
-                ^
-  symbol:   variable b
-  location: class Solution
-/Solution.java:15: error: cannot find symbol
-            if (c == ans) score[2]++;
-                ^
-  symbol:   variable c
-  location: class Solution
-6 errors
+/Solution.java:14: error: no suitable method found for max(int[])
+        int max = Math.max(score);
+                      ^
+    method Math.max(int,int) is not applicable
+      (actual and formal argument lists differ in length)
+    method Math.max(long,long) is not applicable
+      (actual and formal argument lists differ in length)
+    method Math.max(float,float) is not applicable
+      (actual and formal argument lists differ in length)
+    method Math.max(double,double) is not applicable
+      (actual and formal argument lists differ in length)
+1 error
 
 테스트 결과 (~˘▾˘)~
 2개 중 0개 성공
 ```
 
-_마지막 코드 실행: 2026-10-12T14:27:12.319Z_
+_마지막 코드 실행: 2026-10-12T14:29:52.689Z_
