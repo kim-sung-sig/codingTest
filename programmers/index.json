@@ -7,5 +7,14 @@
     "status": "passed",
     "path": "programmers/2025 카카오 하반기 1차/[Lv1][468371] 노란불 신호등",
     "lastRun": "2026-10-12T14:09:06.576Z"
+  },
+  {
+    "lessonId": "59039",
+    "title": "이름이 없는 동물의 아이디",
+    "level": "1",
+    "category": "IS NULL",
+    "status": "passed",
+    "path": "programmers/IS NULL/[Lv1][59039] 이름이 없는 동물의 아이디",
+    "lastRun": "2026-10-12T14:15:31.054Z"
   }
 ]
