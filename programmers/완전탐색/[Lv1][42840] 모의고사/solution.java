@@ -2,7 +2,7 @@ class Solution {
     public int[] solution(int[] answers) {
         int[] answer = {};
         int[] score = new int[3];
-        for (int t = 0; i < answers.length; i++) {
+        for (int t = 0; t < answers.length; t++) {
             int a = aVal(t); b = bVal(t); c = cVal(t);
             int ans = answers[t];
         
@@ -21,9 +21,9 @@ class Solution {
     
     int aVal(int t) { return t % 5 + 1; }
     
-    int[] bValue2 = [1, 3, 4, 5];
+    int[] bValue2 = {1, 3, 4, 5};
     int bVal(int t) { return t % 2 == 0 ? 2 : bValue2[t / 2 % 4]; }
     
-    int[] cValue = [3, 1, 2, 4, 5];
+    int[] cValue = {3, 1, 2, 4, 5};
     int cVal(int t) { return cValue[t / 2 % 5]; }
 }
