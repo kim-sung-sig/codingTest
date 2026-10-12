@@ -4,7 +4,7 @@
 - 난이도: Lv.1
 - 분류: 완전탐색
 - 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/42840
-- 상태: 🔺 시도 중
+- 상태: ✅ 테스트 통과
 
 > 상태는 "코드 실행" 결과(예제 테스트케이스) 기준 추정치이며, 정식 채점(제출) 결과와 다를 수 있습니다.
 
@@ -50,21 +50,18 @@
 ```
 실행 결과
 AI 코드 피드백 (Beta)
-/Solution.java:14: error: no suitable method found for max(int[])
-        int max = Math.max(score);
-                      ^
-    method Math.max(int,int) is not applicable
-      (actual and formal argument lists differ in length)
-    method Math.max(long,long) is not applicable
-      (actual and formal argument lists differ in length)
-    method Math.max(float,float) is not applicable
-      (actual and formal argument lists differ in length)
-    method Math.max(double,double) is not applicable
-      (actual and formal argument lists differ in length)
-1 error
-
+테스트 1
+입력값 〉	[1, 2, 3, 4, 5]
+기댓값 〉	[1]
+실행 결과 〉	테스트를 통과하였습니다.
+테스트 2
+입력값 〉	[1, 3, 2, 4, 2]
+기댓값 〉	[1, 2, 3]
+실행 결과 〉	테스트를 통과하였습니다.
 테스트 결과 (~˘▾˘)~
-2개 중 0개 성공
+2개 중 2개 성공
+샘플 테스트 케이스를 통과했다는 의미로, 작성한 코드가 문제의 정답은 아닐 수 있습니다.
+(샘플 테스트 케이스는 [테스트 케이스 추가하기] 버튼을 통해 확인하실 수 있습니다.)
 ```
 
-_마지막 코드 실행: 2026-10-12T14:29:52.689Z_
+_마지막 코드 실행: 2026-10-12T14:35:42.705Z_

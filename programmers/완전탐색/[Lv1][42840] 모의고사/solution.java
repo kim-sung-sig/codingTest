@@ -1,28 +1,24 @@
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 class Solution {
     public int[] solution(int[] answers) {
-        int[] answer = {};
-        int[] score = new int[3];
-        for (int t = 0; t < answers.length; t++) {
-            int a = aVal(t), b = bVal(t), c = cVal(t);
-            int ans = answers[t];
+        int[][] patterns = {
+            {1, 2, 3, 4, 5},
+            {2, 1, 2, 3, 2, 4, 2, 5},
+            {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
+        };
 
-            if (a == ans) score[0]++;
-            if (b == ans) score[1]++;
-            if (c == ans) score[2]++;
-        }
-        
-        int max = Math.max(score);
-        
+        int[] score = Arrays.stream(patterns)
+                .mapToInt(p -> (int) IntStream.range(0, answers.length)
+                        .filter(i -> answers[i] == p[i % p.length])
+                        .count())
+                .toArray();
 
-        return answer;
+        int maxScore = Arrays.stream(score).max().orElse(0);
+        return IntStream.range(0, 3)
+                .filter(i -> score[i] == maxScore)
+                .map(i -> i + 1)
+                .toArray();
     }
-
-    
-    int aVal(int t) { return t % 5 + 1; }
-    
-    int[] bValue2 = {1, 3, 4, 5};
-    int bVal(int t) { return t % 2 == 0 ? 2 : bValue2[t / 2 % 4]; }
-    
-    int[] cValue = {3, 1, 2, 4, 5};
-    int cVal(int t) { return cValue[t / 2 % 5]; }
 }
